@@ -6,18 +6,18 @@ import LabelList from './LabelList'
 class App extends React.Component {
     state = { images: [] };
 
-    getAllBreeds = () => {
-        axios.get('https://dog.ceo/api/breeds/list/all')
-        .then(response => { 
-                const displayLabels = Object.keys(response.data.message).slice(0, 12);
-                this.setState({images: displayLabels})
-                console.log(displayLabels);
-                // this.setState({images: labels});
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    }
+    // getAllBreeds = () => {
+    //     axios.get('https://dog.ceo/api/breeds/list/all')
+    //     .then(response => { 
+    //             const displayLabels = Object.keys(response.data.message).slice(0, 12);
+    //             this.setState({images: displayLabels})
+    //             console.log(displayLabels);
+    //             // this.setState({images: labels});
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //     });
+    // }
 
     loadAllBreeds = async () => {
     await axios.get('https://dog.ceo/api/breeds/list/all')
@@ -35,12 +35,9 @@ class App extends React.Component {
     render () {
         return (
             <div> 
-                <div style={{marginTop: '20px'}}> 
-                    {this.getAllBreeds()} 
-                </div>    
-                <div className="ui container" style={{marginTop: '20px'}}>
-                    <LabelList images={this.state.images}/>
+                <div className="ui container" style={{marginTop: '10px'}}>
                     <SearchBar onSubmit={this.loadAllBreeds} />
+                    <LabelList images={this.state.images}/>                    
                 </div>
             </div>  
         );

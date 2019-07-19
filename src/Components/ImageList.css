@@ -1,8 +1,9 @@
 .image-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    float: left;
 }
 
 .image-list img{
-    width: 250px;
+    width: 50px;
 }

@@ -29,12 +29,17 @@ class LabelList extends React.Component {
                                     value={image.id}
                                     onClick={this.loadImages}
                                 >
-                                    {image}
+                                {image}
                                 </button>
                     })}
                 </div>
                     {this.state.term.map(imageTerm => {
-                        return <img className="ui medium circular image" src={imageTerm} alt="img" style={{float:"left"}}>></img>
+                        return <img  
+                                    className="image-list" 
+                                    key={imageTerm.id} 
+                                    class="ui medium circular image" 
+                                    src={imageTerm} alt="img"  
+                                />
                     })}
                 <div>
                 </div>
