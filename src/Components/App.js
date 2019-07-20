@@ -7,7 +7,8 @@ import SearchList from './SearchList'
 class App extends React.Component {
     state = { 
         term: '',
-        images: []
+        images: [],
+        imageSearch: []
         };
 
     load12Breeds = async () => {
@@ -15,31 +16,35 @@ class App extends React.Component {
     .then(response => { 
             const labels = Object.keys(response.data.message).slice(0, 12);
             this.setState({
-                images: labels,
+                images: labels
             });
         })
         .catch(error => {
             console.log(error);
         });
     }
-
-    loadAllBreeds = async () => {
-        await axios.get(`https://dog.ceo/api/breed/hound/images`)
-        .then(response => { 
-            this.setState({images: response.data.message})            
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    }
+    
+    loadAllBreeds = () => {
+            let url =  "https://dog.ceo/api/breed/"+`${this.state.term}`+ "/images";
+            fetch(url)
+            .then( response => {
+                console.log(response)
+                this.setState({
+                    imageSearch: response.message
+                });
+            });
+        
+        console.log(this.state.term);
+        console.log(this.state.imageSearch);
+    };
 
     render () {
         return (
             <div> 
                 <div className="ui container" style={{marginTop: '10px'}}>
-                    <SearchBar onSubmit={this.load12Breeds()} />  
+                    <SearchBar onSubmit={this.loadAllBreeds} />  
                     <LabelList images={this.state.images} />    
-                    <SearchList onSearch={this.loadAllBreeds} /> 
+                    <SearchList allBreeds={this.state.imageSearch} /> 
                 </div>
             </div>  
         );
@@ -47,3 +52,4 @@ class App extends React.Component {
 }
 
 export default App;
+// `${this.state.term}`

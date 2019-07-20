@@ -1,27 +1,32 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 class SearchList extends React.Component {
     state = {
-        term : [],
+        term : '',
+        imageSearch: []
     }
 
-    getImages = () =>{
-        axios.get(`https://dog.ceo/api/breed/hound/images`)
-        .then(response => { 
-            this.setState({term: response.data.message})
-            console.log(this.state.term);
-        })
-        .catch(error => {
-            console.log(error);
+    getImages = () => {
+        let url =  "https://dog.ceo/api/breed/"+`${this.state.term}`+"/images";
+        fetch(url).then(response => response.json())
+        .then((response) => {
+            this.setState({
+                imageSearch: response.message.slice(1,10)
+            });
         });
-    }
+    
+    console.log(this.state.imageSearch);
+};
 
     render(){
         return (
-            <div>
+            <div>  
                 <div>
-                    {this.state.term.map(imageTerm => {
+                {this.getImages}
+                {console.log(this.state.term)}
+                {console.log(this.props.allBreeds)}
+                    {this.state.imageSearch.map(imageTerm => {
                     return <img 
                                 key={imageTerm.id} 
                                 class="ui medium circular image" 
@@ -43,3 +48,4 @@ class SearchList extends React.Component {
         }
     }
 export default SearchList;
+//      `${this.state.term}` 
