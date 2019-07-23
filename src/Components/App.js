@@ -38,12 +38,19 @@ class App extends React.Component {
         console.log(this.state.imageSearch);
     };
 
+    componentDidMount = () => {
+        this.load12Breeds();
+    }
+
     render () {
         return (
             <div> 
                 <div className="ui container" style={{marginTop: '10px'}}>
                     <SearchBar onSubmit={this.loadAllBreeds} />  
-                    <LabelList images={this.state.images} />    
+                    <LabelList 
+                        onSuccess={this.load12Breeds}
+                        images={this.state.images}
+                        />    
                     <SearchList allBreeds={this.state.imageSearch} /> 
                 </div>
             </div>  
