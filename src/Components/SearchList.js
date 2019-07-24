@@ -5,7 +5,7 @@ function SearchList (props) {
         return (
             <div>  
                 <div>
-                    {props.allImages.map(imageTerm => {
+                    {props.imageSearch.map(imageTerm => {
                     return <img 
                                 key={imageTerm.id} 
                                 class="ui medium circular image" 

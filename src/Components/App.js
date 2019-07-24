@@ -8,8 +8,12 @@ class App extends React.Component {
     state = { 
         term: '',
         images: [],
-        img: []
+        imageSearch: []
         };
+    
+    componentDidMount = () => {
+        this.load12Breeds();
+    }
 
     load12Breeds = async () => {
     await axios.get('https://dog.ceo/api/breeds/list/all')
@@ -28,15 +32,11 @@ class App extends React.Component {
         await axios.get("https://dog.ceo/api/breed/"+`${term}`+ "/images")
         .then( response => {
         this.setState({
-            img: response.data.message.slice(0,12)
+            imageSearch: response.data.message.slice(0,12)
         });
         console.log(this.state.img)
     });
 
-    }
-
-    componentDidMount = () => {
-        this.load12Breeds();
     }
 
     render () {
@@ -47,8 +47,8 @@ class App extends React.Component {
                     <LabelList 
                         onSuccess={this.load12Breeds}
                         images={this.state.images}
-                        />    
-                    <SearchList allImages={this.state.img} /> 
+                    />    
+                    <SearchList imageSearch={this.state.imageSearch} /> 
                 </div>
             </div>  
         );

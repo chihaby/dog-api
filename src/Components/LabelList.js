@@ -10,7 +10,7 @@ class LabelList extends React.Component {
     loadImages = e =>{
         axios.get(`https://dog.ceo/api/breed/${e.target.innerHTML}/images`)
         .then(response => { 
-            this.setState({term: response.data.message})
+            this.setState({term: response.data.message.slice(0, 12)})
         })
         .catch(error => {
             console.log(error);
